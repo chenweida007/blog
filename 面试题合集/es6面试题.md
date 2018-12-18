@@ -5,10 +5,10 @@
 1. 箭头函数中this的指向问题  
 		会继承
 2. promise 系列问题  
-		event loop问题，和setTimeout 哪个先执行  
-		什么是值穿透  
-		Promise状态一旦改变，无法在发生变更  
-		catch什么时候执行  
+	* event loop问题，和setTimeout 哪个先执行  
+	* 什么是值穿透  
+	* Promise状态一旦改变，无法在发生变更  
+	* catch什么时候执行  
 3. 数据系列问题 
 	... 用法
 		
