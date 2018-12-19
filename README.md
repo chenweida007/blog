@@ -8,10 +8,18 @@
 
 
 ## 面试题合集
-1.
+1. 2018.12.13 **»** [面试题1](https://github.com/shipskunkun/blog/blob/master/%E9%9D%A2%E8%AF%95%E9%A2%98%E5%90%88%E9%9B%86/%E9%9D%A2%E8%AF%95%E9%A2%981.md)  
+2. 2018.12.18 **»**[es6面试题](https://github.com/shipskunkun/blog/blob/master/%E9%9D%A2%E8%AF%95%E9%A2%98%E5%90%88%E9%9B%86/es6%E9%9D%A2%E8%AF%95%E9%A2%98.md)
 
-## js、css基础复习合
+## js、css基础复习合集
 
+###js复习
+
+
+### ES6复习
+
+
+###css复习
 
 
 
