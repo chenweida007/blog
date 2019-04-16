@@ -48,16 +48,15 @@ And this:
 可以使用diff tag 来生成 高亮文本。
 
 
-<h5>
 
-```diff     <br>
-- red     <br>
-+ green     <br>
-! orange     <br>
-# gray     <br>
-```    
 
-</h5>
+<h5>```diff     </h5>
+<h5>- red     </h5>
+<h5>+ green     </h5>
+<h5>! orange    </h5>
+<h5># gray     </h5>
+<h5>```    </h5>
+
 
 
 
