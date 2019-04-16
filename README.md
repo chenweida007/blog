@@ -3,6 +3,11 @@
 个人才疏学浅，希望和大家交流，有错误积极指出
 
 
+## 小技巧
+1. [如何在github中给markdown字体添加颜色](https://github.com/shipskunkun/blog/issues/2) 
+2. 学会科学上网
+
+
 
 
 ## 其它
