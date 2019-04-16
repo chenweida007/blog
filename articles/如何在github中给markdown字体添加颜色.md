@@ -29,6 +29,14 @@ And this:
 值得一提的是，您可以使用占位符图像服务在自述文件中添加一些颜色。
 例如，提供颜色列表以供参考：
 
+``` js
+- ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `#f03c15`
+- ![#c5f015](https://placehold.it/15/c5f015/000000?text=+) `#c5f015`
+- ![#1589F0](https://placehold.it/15/1589F0/000000?text=+) `#1589F0`
+
+```
+
+效果如下：
 
 - ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `#f03c15`
 - ![#c5f015](https://placehold.it/15/c5f015/000000?text=+) `#c5f015`
@@ -38,6 +46,23 @@ And this:
 解决方案2：
 
 可以使用diff tag 来生成 高亮文本。
+
+
+<h5>
+
+```diff     <br>
+- red     <br>
++ green     <br>
+! orange     <br>
+# gray     <br>
+```    
+
+</h5>
+
+
+
+效果如下： 
+
 
 ```diff
 - red
@@ -53,38 +78,41 @@ github目前不支持文档color、 style标签
 
 如果你这样写了 
 
+```js
 <span style="color:orange;">Word up</span>
-
+```
 github会视为html
 
 虽然不支持添加 color tag ，但是我们可以使用以下tag去添加一些颜色
 
-```json
-   // code for coloring
-```
-```html
-   // code for coloring
-```
-```js
-   // code for coloring
-```
-```css
-   // code for coloring
-```
-// etc.
+<h5>
+```json <br>
+   // code for coloring <br>
+``` <br>
+```html <br>
+   // code for coloring <br>
+``` <br>
+```js <br>
+   // code for coloring <br>
+``` <br>
+```css <br>
+   // code for coloring <br>
+``` <br>
+// etc. <br>
+</h5>
 
 
-如果你真的非常想在readme.md 中使用颜色，可以在readme.md中链接到 readme.html  文件，这个文件里可以使用样式呀
 
-3. 
 
+如果你真的非常想在readme.md 中使用颜色，可以在readme.md中链接到 readme.html  文件，这个文件里可以使用样式
+ 
 
 
 ## 总结
 
 1. 使用 diff + - ! #（可以！满足基本需求
 2. 文字加不了颜色，给这一行加上有颜色的表头图片 (麻烦，pass
-3. 使用 ``` js、```html、 ```css （虽然不是想要的，pass
+3. 使用 json、js、html、css 标记语法（虽然不是想要的，pass
 4. 链接到 readme.html 文件（也不太好
 
 
