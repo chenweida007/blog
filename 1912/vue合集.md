@@ -1,4 +1,4 @@
-vue组件间通信方式
+## 1.vue组件间通信方式
 
 
 
@@ -26,16 +26,151 @@ action异步修改状态
 
 
 3. 几个兄弟模板之间，可以使用这种方法，几个模板都能访问到这个event对象，
+
+```
 var Event = new Vue ();
-    
 Event.$emit(事件名,数据);
-    
 Event.$on(事件名,data =>{});
 
+
+this.$bus.$on('my',data=>{
+　　console.log(data)
+})
+
+this.$bus.$emit('my',"我是小红”);
+```
+
+
+## 2. 生命周期
+在 beforeCreate 钩子函数调用的时候，是获取不到 props 或者 data 中的数据的，因为这些数据的初始化都在 initState 中。
+
+然后会执行 created 钩子函数，在这一步的时候已经可以访问到之前不能访问到的数据，但是这时候组件还没被挂载，所以是看不到的。
+
+接下来会先执行 beforeMount 钩子函数，开始创建 VDOM，最后执行 mounted 钩子，并将 VDOM 渲染为真实 DOM 并且渲染数据。组件中如果有子组件的话，会递归挂载子组件，只有当所有子组件全部挂载完毕，才会执行根组件的挂载钩子。
+
+接下来是数据更新时会调用的钩子函数 beforeUpdate 和 updated，这两个钩子函数没什么好说的，就是分别在数据更新前和更新后会调用。
+
+另外还有 keep-alive 独有的生命周期，分别为 activated 和 deactivated 。用 keep-alive 包裹的组件在切换时不会进行销毁，而是缓存到内存中并执行 deactivated 钩子函数，命中缓存渲染后会执行 actived 钩子函数。
+
+最后就是销毁组件的钩子函数 beforeDestroy 和 destroyed。前者适合移除事件、定时器等等，否则可能会引起内存泄露的问题。然后进行一系列的销毁操作，如果有子组件的话，也会递归销毁子组件，所有子组件都销毁完毕后才会执行根组件的 destroyed 钩子函数。
+
+
+
+##  v-show 与 v-if 区别
+v-show 只是在 display: none 和 display: block 之间切换。无论初始条件是什么都会被渲染出来，后面只需要切换 CSS，DOM 还是一直保留着的。所以总的来说 v-show 在初始渲染时有更高的开销，但是切换开销很小，更适合于频繁切换的场景。
+
+v-if 的话就得说到 Vue 底层的编译了。当属性初始为 false 时，组件就不会被渲染，直到条件为 true，并且切换条件时会触发销毁/挂载组件，所以总的来说在切换时开销更高，更适合不经常切换的场景。
+
+并且基于 v-if 的这种惰性渲染机制，可以在必要的时候才去渲染组件，减少整个页面的初始渲染开销。
+
+
+## 响应式原理
+
+```
+var data = { name: 'yck' }
+observe(data)
+let name = data.name // -> get value
+data.name = 'yyy' // -> change value
+
+function observe(obj) {
+  // 判断类型
+  if (!obj || typeof obj !== 'object') {
+    return
+  }
+  Object.keys(obj).forEach(key => {
+    defineReactive(obj, key, obj[key])
+  })
+}
+
+function defineReactive(obj, key, val) {
+  // 递归子属性
+  observe(val)
+  Object.defineProperty(obj, key, {
+    // 可枚举
+    enumerable: true,
+    // 可配置
+    configurable: true,
+    // 自定义函数
+    get: function reactiveGetter() {
+      console.log('get value')
+      return val
+    },
+    set: function reactiveSetter(newVal) {
+      console.log('change value')
+      val = newVal
+    }
+  })
+}
+
+
+```
+
+首先直接把模板丢到浏览器中肯定是不能运行的，模板只是为了方便开发者进行开发。Vue 会通过编译器将模板通过几个阶段最终编译为 render 函数，然后通过执行 render 函数生成 Virtual DOM 最终映射为真实 DOM。
+
+接下来我们就来学习这个编译的过程，了解这个过程中大概发生了什么事情。这个过程其中又分为三个阶段，分别为：
+
+将模板解析为 AST
+优化 AST
+将 AST 转换为 render 函数
+
+
+
+
+## Webpack 性能优化
+
+减少 Webpack 打包时间  
+优化 Loader  
+首先我们可以优化 Loader 的文件搜索范围  
+当然这样做还不够，我们还可以将 Babel 编译过的文件缓存起来  
+
+HappyPack 可以将 Loader 的同步执行转换为并行的，这样就能充分利用系统资源来加快打包效率了
+
+代码压缩
+
+DllPlugin 可以将特定的类库提前打包然后引入。这种方式可以极大的减少打包类库的次数，只有当类库更新版本才有需要重新打包，并且也实现了将公共代码抽离成单独文件的优化方案。
+
+
+## loader plugin 区别
+https://blog.csdn.net/qq_42375089/article/details/88072681
+
+
+loader从模板路径解析，npm install node_modules。也可以自定义loader，命名XXX-loader。
+
+语言类的处理器loader：CoffeeScript，TypeScript，ESNext（Bable）,Sass,Less,Stylus。任何开发技术栈都可以使用webpack。
+
+【Plugin】：目的在于解决loader无法实现的其他事，从打包优化和压缩，到重新定义环境变量，功能强大到可以用来处理各种各样的任务。webpack提供了很多开箱即用的插件：CommonChunkPlugin主要用于提取第三方库和公共模块，避免首屏加载的bundle文件，或者按需加载的bundle文件体积过大，导致加载时间过长，是一把优化的利器。而在多页面应用中，更是能够为每个页面间的应用程序共享代码创建bundle。
+
+## 性能优化
+
+图片加载优化    
+不用图片。很多时候会使用到很多修饰类图片，其实这类修饰图片完全可以用 CSS 去代替。  
+对于移动端来说，屏幕宽度就那么点，完全没有必要去加载原图浪费带宽。一般图片都用 CDN 加载，可以计算出适配屏幕的宽度，然后去请求相应裁剪好的图片。  
+小图使用 base64 格式  
+将多个图标文件整合到一张图片中（雪碧图）  
+选择正确的图片格式：  
+对于能够显示 WebP 格式的浏览器尽量使用 WebP 格式。因为 WebP 格式具有更好的图像数据压缩算法，能带来更小的图片体积，而且拥有肉眼识别无差异的图像质量，缺点就是兼容性并不好  
+小图使用 PNG，其实对于大部分图标这类图片，完全可以使用 SVG 代替  
+照片使用 JPEG  
+
+
+dns 预解析  
+节流    
+防抖  
+预加载  
+```
+<link rel="preload" href="http://example.com">
+```
+
+懒加载   
+懒加载就是将不关键的资源延后加载。    
+
+懒加载的原理就是只加载自定义区域（通常是可视区域，但也可以是即将进入可视区域）内需要加载的东西。对于图片来说，先设置图片标签的 src 属性为一张占位图，将真实的图片资源放入一个自定义属性中，当进入自定义区域时，就将自定义属性替换为 src 属性，这样图片就会去下载资源，实现了图片懒加载。  
+
+懒加载不仅可以用于图片，也可以使用在别的资源上。比如进入可视区域才开始播放视频等等。  
 
 
 
 
 参考文章：
 
-https://mp.weixin.qq.com/s/vB_9Q4DyqE5crO-hpD_kWg
+[通信的6种方式](https://mp.weixin.qq.com/s/vB_9Q4DyqE5crO-hpD_kWg)
