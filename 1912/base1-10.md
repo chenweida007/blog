@@ -1,130 +1,294 @@
+参考文献：  
+[面试小册1](https://juejin.im/book/5bdc715fe51d454e755f75ef/section/5bdc715f6fb9a049c15ea4e0)
 
+[import require区别](https://juejin.im/post/5b0685c151882538a808aded
+)
 
+[import](https://juejin.im/post/597ec55a51882556a234fcef)
 
+[郭冬冬整理](https://juejin.im/post/5c64d15d6fb9a049d37f9c20#heading-6)
 
+10道基础题
 
-## 2. 输入url过程干了什么
+1. 变量提升、暂时性死区
+2. 模块化,commonjs与es6区别
+3. 手写promise
+4. js原型和构造函数之间的关系
+5. 闭包、作用域链相关
+6. script 引入方式
+7. 代码的复用
+8. 异步解决方案
 
-##### 2.1 DNS 的作用就是通过域名查询到具体的 IP。  
-操作系统会首先在本地缓存中查询 IP  
-没有的话会去系统配置的 DNS 服务器中查询   
-如果这时候还没得话，会直接去 DNS 根服务器查询，这一步查询会找出负责 com 这个一级域名的服务器    
-然后去该服务器查询 google 这个二级域名   
-接下来三级域名的查询其实是我们配置的，你可以给 www 这个域名配置一个 IP，然后还可以给别的三级域名配置一个 IP  
 
 
-##### 2.2 接下来是 TCP 握手，应用层会下发数据给传输层，这里 TCP 协议会指明两端的端口号，然后下发给网络层。
 
+## 1. let、const、var
 
+1. 使用 var 声明的变量会被提升到作用域的顶部,let 和 const 不会。   
+2. 函数会被提升，并且优先于变量提升。
+3. 只要块级作用域内存在let命令，它所声明的变量就“绑定”（binding）这个区域，不再受外部的影响。在let声明变量前，对tmp赋值会报错。
 
-首先浏览器会判断状态码是什么，如果是 200 那就继续解析，如果 400 或 500 的话就会报错，如果 300 的话会进行重定向，这里会有个重定向计数器，避免过多次的重定向，超过次数也会报错。
+let、const:  块级作用域、不存在变量提升、暂时性死区、不允许重复声明  
+const: 声明常量，无法修改
 
-浏览器开始解析文件，如果是 gzip 格式的话会先解压一下，然后通过文件的编码格式知道该如何去解码文件。
 
-文件解码成功后会正式开始渲染流程，先会根据 HTML 构建 DOM 树，有 CSS 的话会去构建 CSSOM 树。如果遇到 script 标签的话，会判断是否存在 async 或者 defer ，前者会并行进行下载并执行 JS，后者会先下载文件，然后等待 HTML 解析完成后顺序执行。
+## 2. 模块化
 
-如果以上都没有，就会阻塞住渲染流程直到 JS 执行完毕。遇到文件下载的会去下载文件，这里如果使用 HTTP/2 协议的话会极大的提高多图的下载效率。
+#### 1.exoports 和 module.exports 区别？  
 
-CSSOM 树和 DOM 树构建完成后会开始生成 Render 树，这一步就是确定页面元素的布局、样式等等诸多方面的东西
+在一个node执行一个文件时，会给这个文件内生成一个 exports和module对象，  
+而module又有一个exports属性。他们之间的关系如下图，都指向一块{}内存区域。
+exports = module.exports = {};
 
-在生成 Render 树的过程中，浏览器就开始调用 GPU 绘制，合成图层，将内容显示在屏幕上了。
+![img](https://user-gold-cdn.xitu.io/2017/7/31/6227d4e0917f4af649d9f9e750eddb09?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 
-这一部分就是渲染原理中讲解到的内容，可以详细的说明下这一过程。并且在下载文件时，也可以说下通过 HTTP/2 协议可以解决队头阻塞的问题。
+其实require导出的内容是module.exports的指向的内存块内容，并不是exports的。
+简而言之，区分他们之间的区别就是 exports 只是 module.exports的引用，辅助后者添加内容用的。
 
-总的来说这一章节就是带着大家从 DNS 查询开始到渲染出画面完整的了解一遍过程，将之前学习到的内容连接起来。
+为了避免糊涂，尽量都用 module.exports 导出，然后用require导入。
 
-## 2. http\https
 
-HTTPS 还是通过了 HTTP 来传输信息，但是信息通过 TLS 协议进行了加密。
-在 TLS 中使用了两种加密技术，分别为：对称加密和非对称加密。
 
 
-对称加密：
+#### 2. 模块化优点？  
 
-对称加密就是两边拥有相同的秘钥，两边都知道如何将密文加密解密。
+	解决命名冲突  
+	提供复用性  
+	提高代码可维护性  
 
-这种加密方式固然很好，但是问题就在于如何让双方知道秘钥。因为传输数据都是走的网络，如果将秘钥通过网络的方式传递的话，一旦秘钥被截获就没有加密的意义的。
+ES Module 是原生实现的模块化方案，与 CommonJS 有以下几个区别
 
+##### 1.遵循的规范不同
+1. equire/exports是CommonJS的一部分
 
-非对称加密：
+2. import/export是ES6新规范
 
-有公钥私钥之分，公钥所有人都可以知道，可以将数据用公钥加密，但是将数据解密必须使用私钥解密，私钥只有分发公钥的一方才知道。
 
-这种加密方式就可以完美解决对称加密存在的问题。假设现在两端需要使用对称加密，那么在这之前，可以先使用非对称加密交换秘钥。
+#####  2.形式不同
 
-简单流程如下：首先服务端将公钥公布出去，那么客户端也就知道公钥了。接下来客户端创建一个秘钥，然后通过公钥加密并发送给服务端，服务端接收到密文以后通过私钥解密出正确的秘钥，这时候两端就都知道秘钥是什么了。
+```
+export / import : es6
+module.exports / exports/ require: commonjs
+require / defined: amd
 
+require/exports 的用法只有以下三种：
 
+const fs = require('fs');
+ exports.fs = fs;
+ module.exports = fs;
 
+import/export的写法就多种多样
+import fs from 'fs';
+import {default as fs} from 'fs';
+import * as fs from 'fs';
 
-参考资料：  
-[面试之道](https://juejin.im/book/5bdc715fe51d454e755f75ef/section/5bdc724af265da610f632e41)
+export default fs;
+export const fs;
+export * from 'fs';
 
+```
 
+##### 3.本质上的不同
+1. CommonJS还是ES6 Module 输出都可以看成是一个具备多个属性或者方法的对象;  
+2. default 是ES6 Module所独有的关键字，export default 输出默认的接口对象，import from 'fs'可直接导入这个对象;  
+3. ES6 Module中导入模块的属性或者方法是强绑定的，包括基础类型；而 CommonJS 则是普通的值传递或者引用传递。  
 
-## 3. 安全防范知识点
 
-涉及面试题：什么是 XSS 攻击？如何防范 XSS 攻击？什么是 CSP？
 
-XSS 简单点来说，就是攻击者想尽一切办法<font color=" red" >  将可以执行的代码注入到网页中。</font>
+4. require支持 动态导入，import不支持，正在提案 (babel 下可支持)
+5. require是 同步 导入，import属于 异步 导入
+6. require是 值拷贝，导出值变化不会影响导入值；import指向 内存地址，导入值会随导出值而变化
 
-XSS 可以分为多种类型，但是总体上我认为分为两类：持久型和非持久型。
 
-持久型也就是攻击的代码被服务端写入进数据库中，这种攻击危害性很大，因为如果网站访问量很大的话，就会导致大量正常访问页面的用户都受到攻击。
 
-举个例子，对于评论功能来说，就得防范持久型 XSS 攻击，因为我可以在评论中输入以下内容
+```
+// counter.js
+exports.count = 0
+setTimeout(function () {
+  console.log('increase count to', ++exports.count, 'in counter.js after 500ms')
+}, 500)
 
-非持久型相比于前者危害就小的多了，一般通过修改 URL 参数的方式加入攻击代码，诱导用户访问链接从而进行攻击。
+// commonjs.js
+const {count} = require('./counter')
+setTimeout(function () {
+  console.log('read count after 1000ms in commonjs is', count)
+}, 1000)
 
-举个例子，如果页面需要从 URL 中获取某些参数作为内容的话，不经过过滤就会导致攻击代码被执行
+//es6.js
+import {count} from './counter'
+setTimeout(function () {
+  console.log('read count after 1000ms in es6 is', count)
+}, 1000)
 
 
+0
+1
 
-转义字符   
-首先，对于用户的输入应该是永远不信任的。最普遍的做法就是转义输入输出的内容，对于引号、尖括号、斜杠进行转义
+➜  test node commonjs.js
+increase count to 1 in counter.js after 500ms
+read count after 1000ms in commonjs is 0
+➜  test babel-node es6.js
+increase count to 1 in counter.js after 500ms
+read count after 1000ms in es6 is 1
 
+```
 
-js-xss
 
 
+## 3. promise
 
-CSRF 中文名为跨站请求伪造。原理就是攻击者构造出一个后端请求地址，诱导用户点击或者通过某些途径自动发起请求。如果用户是在登录状态下的话，后端就以为是用户在操作，从而进行相应的逻辑。
+首先思考。这个方法具有哪些变量和函数？  
+状态 
+value  
+成功回调函数数组  
+失败回调函数数组
+resove 和 reject 函数干嘛的  
+then  
 
 
-防范 CSRF 攻击可以遵循以下几种规则：
 
 
-Get 请求不对数据进行修改  
-不让第三方网站访问到用户 Cookie  
-阻止第三方网站请求接口  
-请求时附带验证信息，比如验证码或者 Token  
-SameSite  
-可以对 Cookie 设置 SameSite 属性。该属性表示 Cookie 不随着跨域请求发送，可以很大程度减少 CSRF 的攻击，但是该属性目前并不是所有浏览器都兼容。  
 
-验证 Referer   
-对于需要防范 CSRF 的请求，我们可以通过验证 Referer 来判断该请求是否为第三方网站发起的。   
 
-Token   
-服务器下发一个随机 Token，每次发起请求时将 Token 携带上，服务器验证 Token 是否有效。   
 
+## 4. js原型和构造函数之间的关系
 
+![img](https://user-gold-cdn.xitu.io/2019/2/14/168e9d9b940c4c6f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 
 
+![原型关系图](https://user-gold-cdn.xitu.io/2018/11/16/1671d387e4189ec8?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 
+```
 
+实例.__proto__ === 原型
 
+原型.constructor === 构造函数
 
-## 4. 浏览器缓存
+构造函数.prototype === 原型
 
-强缓存，
-强缓存可以通过设置两种 HTTP Header 实现：Expires 和 Cache-Control 。强缓存表示在缓存期间不需要请求，state code 为 200。
 
-协商缓存  
-如果缓存过期了，就需要发起请求验证资源是否有更新。协商缓存可以通过设置两种 HTTP Header 实现：Last-Modified 和 ETag 。
+```
+原型链：  
 
+```
+目的是什么？共享继承；  
+指针是什么？  proto  
+最终指向什么，祖先的原型  
+属性继承和修改策略 
+```
 
+原型链是由原型对象组成，每个对象都有 
+``` 
+__proto__ 
+``` 
+</font>属性，指向了创建该对象的构造函数的原型，``` 
+__proto__ 
+``` 将对象连接起来组成了原型链。是一个用来实现继承和共享属性的有限的对象链。
 
 
+属性查找机制: 当查找对象的属性时，如果实例对象自身不存在该属性，则沿着原型链往上一级查找，找到时则输出，不存在时，则继续沿着原型链往上一级查找，直至最顶级的原型对象Object.prototype，如还是没找到，则输出undefined；
+
+
+属性修改机制: 只会修改实例对象本身的属性，如果不存在，则进行添加该属性，如果需要修改原型的属性时，则可以用: b.prototype.x = 2；但是这样会造成所有继承于该对象的实例的属性发生改变。
+
+
+
+## 5. 
+
+
+执行上下文(EC)  
+执行上下文可以简单理解为一个对象:  
+
+
+它包含三个部分:
+
++ 变量对象(VO)
++ 作用域链(词法作用域)  
++ this指向
+
+
+
+它的类型:
+
++ 全局执行上下文
++ 函数执行上下文
++ eval执行上下文
+
+
+
+<font color="red">作用域</font>其实可理解为该上下文中声明的 变量和声明的作用范围。可分为 块级作用域 和 函数作用域
+
+
+我们知道，我们可以在执行上下文中访问到父级甚至全局的变量，这便是作用域链的功劳。作用域链可以理解为一组对象列表，包含 父级和自身的变量对象，因此我们便能通过作用域链访问到父级里声明的变量或者函数。
+
+由两部分组成:
+
+[[scope]]属性: 指向父级变量对象和作用域链，也就是包含了父级的[[scope]]和AO  
+AO: 自身活动对象
+
+
+
+
+闭包的定义可以理解为: 父函数被销毁 的情况下，返回出的子函数的[[scope]]中仍然保留着父级的单变量对象和作用域链，因此可以继续访问到父级的变量对象，这样的函数称为闭包。
+
+
+## 6. script 引入方式：
+html 静态<script>引入
+js 动态插入<script>
+<script defer>: 延迟加载，元素解析完成后执行
+<script async>: 异步加载，但执行时会阻塞元素渲染
+
+
+##7. 代码的复用
+当你发现任何代码开始写第二遍时，就要开始考虑如何复用。一般有以下的方式:
+
+函数封装
+继承  
+复制extend
+混入mixin
+借用apply/call
+
+
+## 8.异步解决方案:
+
+
+Promise的使用与实现
+
+
+generator:
+
+yield: 暂停代码
+next(): 继续执行代码
+
+
+```
+function* helloWorld() {
+  yield 'hello';
+  yield 'world';
+  return 'ending';
+}
+
+const generator = helloWorld();
+
+generator.next()  // { value: 'hello', done: false }
+
+generator.next()  // { value: 'world', done: false }
+
+generator.next()  // { value: 'ending', done: true }
+
+generator.next()  // { value: undefined, done: true }
+
+
+await / async: 是generator的语法糖， babel中是基于promise实现。
+
+async function getUserByAsync(){
+   let user = await fetchUser();
+   return user;
+}
+
+const user = await getUserByAsync()
+console.log(user)
+```
 
 
 
