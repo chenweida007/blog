@@ -1,9 +1,9 @@
 
 ### 6月计划
-31. Vue全家桶+SSR+Koa2全栈开发美团网
-39. Vue 实战商业级读书Web APP 全面提升技能
-18. Vue2.0开发企业级移动端音乐Web Appustbhuangyiustbhuangyi
-16. Vue2.6+Node.js+MongoDB 全栈打造商城系统河畔一角河畔一角
+	
+	18. Vue2.0开发企业级移动端音乐Web Appustbhuangyiustbhuangyi
+	16. Vue2.6+Node.js+MongoDB 全栈打造商城系统河畔一角河畔一角
+
 
 
 
@@ -14,10 +14,14 @@
 
 
 
-6. Vue全家桶实战 从零独立开发企业级电商系统(免费升级Vue3.0)
-7. Vue Element+Node.js开发企业通用管理后台系统
-10. Node.js+Koa2框架生态实战 - 从零模拟新浪微博双越双越
-11. Electron+React+七牛云 实战跨平台桌面应用
+	6. Vue全家桶实战 从零独立开发企业级电商系统(免费升级Vue3.0)
+	7. Vue Element+Node.js开发企业通用管理后台系统
+	31. Vue全家桶+SSR+Koa2全栈开发美团网
+	39. Vue 实战商业级读书Web APP 全面提升技能
+	
+
+
+
 
 
 
@@ -43,22 +47,22 @@ done（9+
 	37. 微信小程序入门与实战 常用组件API开发技巧项目实战
 	38. Vue.js2.5+cube-ui重构饿了么App（经典再升级
 
-todo
+todo ( 4
 
 	6. Vue全家桶实战 从零独立开发企业级电商系统(免费升级Vue3.0)
 	7. Vue Element+Node.js开发企业通用管理后台系统
-	10. Node.js+Koa2框架生态实战 - 从零模拟新浪微博双越双越
-	11. Electron+React+七牛云 实战跨平台桌面应用
 	31. Vue全家桶+SSR+Koa2全栈开发美团网
 	39. Vue 实战商业级读书Web APP 全面提升技能
 
 
 
-wait
+wait ( 16
 	
 	1. 大前端：前端全栈加强版！前端全栈+全周期+多端（升级Vue3.0）
 	2. Typescript + React 高仿 Antd 从零到一打造自己的组件库 
 	4. TypeScript  系统入门到项目实战 趁早学习提高职场竞争力
+	10. Node.js+Koa2框架生态实战 - 从零模拟新浪微博双越双越
+	11. Electron+React+七牛云 实战跨平台桌面应用
 	16. Node.js仿知乎服务端-深入理解RESTful 
 	20. React劲爆新特性Hooks 重构旅游电商网站火车票
 	23. 手把手教你用Node.js+Koa2开发 从0到1打造超好用的Web框架
@@ -72,7 +76,7 @@ wait
 	36. React源码深度解析 高级前端工程师必备技能
 
 
-not at all
+not at all ( 11
 	
 
 	5. JavaScript玩转机器学习 打造你人生中的第一个AI项目
@@ -101,12 +105,12 @@ done（7+
 	14. 让你页面速度飞起来 Web前端性能优化千迦千迦
 	19. 腾讯大牛亲授 Web前后端漏洞分析与防御技巧
 
-todo
+todo( 2
 
 	18. Vue2.0开发企业级移动端音乐Web Appustbhuangyiustbhuangyi
 	16. Vue2.6+Node.js+MongoDB 全栈打造商城系统河畔一角河畔一角
 
-wait
+wait(6
 
 	1. React服务器渲染原理解析与实践
 	3. Javascript设计模式系统讲解与应用
@@ -116,7 +120,7 @@ wait
 	12. React16+React-Router4 从零打造企业级电商后台管理系统RosenRosen
 
 
-not at all
+not at all  ( 5
 
 	11. 微信小游戏入门与实战 刷爆朋友圈傅猿猿傅猿猿
 	13. 全面系统讲解CSS工作应用+面试一步搞定TooooBugTooooBug
