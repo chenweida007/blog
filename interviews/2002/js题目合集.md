@@ -39,6 +39,11 @@ var b = 10;
 
 12， 有 length 和 slice 可以将类数组转为数组
 
+
+Array.prototype.slice.call(arrayLike)
+
+Array.from
+
 ```
 var obj = {
     '2':3,
@@ -78,10 +83,10 @@ console.log(obj)
 
 17，es6转为es5 
 
-1. 使用babel/parser  字符代码串解析生抽象语法树，ast，
-2. 对ast进行处理，对es6代码进行相应转为，转成es5, 如 let const 转为 var, 箭头函数转为 function 等
-3. 采用 babel-polyfill 对 es5 中不存在的 api 做修复，使用相应的es5代码实现这些api, 如 map、 set
-4. 处理后的ast再生出代码字符串  
+	1. 使用babel/parser  字符代码串解析生抽象语法树，ast，
+	2. 对ast进行处理，对es6代码进行相应转为，转成es5, 如 let const 转为 var, 箭头函数转为 function 等
+	3. 采用 babel-polyfill 对 es5 中不存在的 api 做修复，使用相应的es5代码实现这些api, 如 map、 set
+	4. 处理后的ast再生出代码字符串  
 
 
 18， for 效率高于 forEach
