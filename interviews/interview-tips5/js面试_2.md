@@ -95,3 +95,222 @@
 	而临时重定向，每次还是先去老地址，通过服务端的跳转，然后跳转到新地址
 	
 	3. 301 的地址会被永久缓存在浏览器端，如果用户不主动清缓存，是不会变的，所以301地址变化需要谨慎处理
+
+
+## 9. 缓存区别，
+
+### todo interview-tips3- 3 -3章
+
+vuex：存在虚拟内存中，页面刷新就没有了
+
+用户登录，用户信息，不要存在localStorage，使用 vuex存储，
+
+1. 存在本地，明文存储，不安全。
+
+2. 用户信息更新频繁
+localStorage：
+
+持久化存储，页面刷新还是回存在
+防止页面经常刷新，页面变化，数据还存在
+比如首页信息，放在localStorage 中，不会每次刷新就变化
+但是有个缺点，是永久存储，数据不会变
+每次存储数据，设置存储时间，下次拿的时候，拿当前时间和存储时间做对比，如果超过10min, 从服务器拿，做持久化存储的过期限制
+
+
+
+## 10. interview4 - 3
+
+1. beforeCreate，实例初始化在这个生命周期遍历 data 对象下所有属性将其转化为 getter/setter,  无data, 
+
+2. created，实例已经被创建完毕 属性已经绑定 属性是可以操作的, 有data。在控制台打印data ，可以访问到属性了
+
+3. beforeMount， 模板编译， el还未对数据进行渲染 还是不能操作dom，这个时候不能访问 ```$ref, $el``` 原生dom
+
+
+4. mounted, 页面渲染完，数据挂载到 dom 上  ，控制台打印出dom。	
+	对象页面渲染完毕，可以ajax请求，或者绑定事件	
+
+5. beforeUpdate， data被修改，dom没有修改	
+6. updated， 虚拟dom重新渲染并应用更新	
+
+7. beforeDestroy，销毁绑定事件监听	
+	
+ 	beforeDestroy钩子函数在实例销毁之前调用。在这一步，实例仍然完全可用。
+ 	
+ 	比如消除 setTimout 定时任务，绑定事件
+
+8. destroyed钩子函数在Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
+
+ 
+父 beforeCreate > 父created > 父 beforMount , 子组件beforeCreate ， 子组件created > 子组件beforMount， 子组件mounted，  父组件 mounted
+
+
+
+
+## 11.  何时使用 beforeDestory
+
+		1. 解绑自定义事件， event.$off, 
+		
+		2. 清楚定时器
+		
+		3. 解绑自定义的dom 事件，addEventLisener, 如 window scroll
+
+
+## 12  module chunk bundle 区别
+
+module： webpack 中一切皆模块， 只有可以被引用的文件，都是模块
+
+chunk： 多模块合并成的， 如 entry import() splitChunk
+
+> chunk三大来源
+	
+	entry
+	splitChunks
+	import()
+	
+	
+	
+是一系列模块文件生成的文件
+	
+	比如 entry index.js 文件，可能不止index.js 这一个文件，把这个页面引用的 其他文件，生成 chunk
+	
+	比如异步引入文件，import().then 生成一个 chunk
+	
+	比如，把所有的第三方库，生成一个 chunk
+	
+	把 公共模块，生成一个chunk
+	
+bundle： 最终的输出文件，在 dist 文件下生成的文件。
+
+
+## 13.webpack 优化
+
+dev 环境，构建速度：
+	
+	更小
+		因为uglifyjs不支持es6语法，所以用terser-webpack-plugin替代uglifyjs-webpack-plugin
+		TerserJSPlugin，js压缩
+		OptimizeCSSAssetsPlugin， css压缩
+		ignorePlugin，不引入无用模块，比如引入 moment日期内库，默认引入所有语音js代码，只引入中文、英文即可
+		noparse，引入不编译, 不进行模块化分析
+	
+	更快
+		happyPack  多进程打包，注意不是多线程。 
+		paralleUglify  多进程压缩js
+	
+	缓存
+		优化 babel-loader，开启缓存，cacheDirectory，明确范围，include，exclude，不用每次重新编译
+		DllPlugin  比较大的第三方库，不用每次打包都打包一次
+	
+	性能
+		自动刷新
+		热更新  浏览器不刷新，代码已生效
+
+
+生产环境：
+
+	代码分割
+		第三方代码，公共代码抽出， splitchunks, cacheGroups
+	
+	tree shaking
+		使用production
+		
+		自动代码压缩
+	
+	异步加载
+		懒加载，组件的异步加载
+		
+	优化
+		bundle 加 hash， 内容hash编码 [name].[contentHash:8].js
+		小图base64 编码  		
+		Scope Hosting
+	更小
+		ignorePlugin, 打包代码更少
+		
+	更快
+		使用 CDN 加速, 把打包文件，放到 cdn 服务器上去，让 publicPath 可访问
+		作用：让所有静态文件 url 的前缀
+		
+		output: {
+		    filename: '[name].[contentHash:8].js', // name 即多入口时 entry 的 key
+		    path: distPath,
+		    // publicPath: 'http://cdn.abc.com'  // 修改所有静态文件 url 的前缀（如 cdn 域名），这里暂时用不到
+		},
+
+## 14. es6 commonjs
+
+ES6 module 静态引入，编译时引用
+	
+	无条件引入
+	打包的时候，能直接识别到
+	不能在条件中引用，不能通过代码判断，是否能用
+	
+commonjs 动态引入，执行时引入
+	
+	打包的时候不知道是啥，只有执行的时候才能引用
+	
+只有 es6 module 才能静态分析， 实现 tree shaking
+
+webpack打包的时候，代码还没有执行，只是静态分析，代码还没有正式被使用
+
+```
+let apiList = require('../config/api.js')
+if(isDev) { 
+  //执行的时候才知道，里面的代码是否会执行
+  // 执行的时候才知道 isDev 是否执行
+  apiList = require('../config/api_dev.js')
+  
+  //编译时候回报错，只能静态引入
+  import apiList from '../config/api.js'
+}
+
+
+import apiList from '../config/api.js'
+
+import不能在逻辑判断里面。在编译时就知道，是否能引入。
+
+```
+## 15. 为何 proxy 不能被 polyfill
+
+		class 可以通过 function模拟  
+		promise可以使用callback 模拟  
+		proxy 无法使用 Object.defineProperty 无法模拟
+## 16. 懒加载
+
+	rect = item.getBoundingClientRect() //元素相对视图窗口的位置
+
+	if(rect.bottom > 0 && rect.top < document.clientHeight) {
+	或者
+	rect.top > 0
+	
+	4. preload.js 库
+
+	什么时候执行预加载？
+	
+	 window.onload = function() { 
+	 	addLoadEvent(preloader);
+	 }
+## 17. 如何写一个loader
+
+需求：我们需要替换js文件中的字段
+
+console.log('hello lee');
+
+	如把 lee 替换成 world
+
+
+loaders 文件夹中，replaceLoader.js 中写
+
+	
+	module.exports = function(source) {
+		return source.replace('lee', 'world');
+	}
+2. 网站出中文版，外国版，实现网站国际化
+	我们根据某个全局变量，判断是中文还是英文，打包生成不同版本
+	
+		
+		if(node 全局变量 === “中文”) {
+			source.replace('{{title}}', '中文标题')
+		}else {
+			source.replace('{{title}}', '英文标题')
+		}
