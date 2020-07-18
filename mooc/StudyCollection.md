@@ -28,9 +28,16 @@ mooc
 	
 1. [大厂 H5 开发实战手册](https://juejin.im/book/5a7bfe595188257a7349b52a)
 
-
 2. [使用 webpack 定制前端开发环境](https://juejin.im/book/5a6abad5518825733c144469)
 
+3. [Web 前端面试指南与高频考题解析](https://juejin.im/book/5a8f9ddcf265da4e9f6fb959)
+
+4. [vue组件精讲](https://juejin.im/book/5bc844166fb9a05cd676ebca/section/5bdc0e596fb9a049d7471ddb#heading-1)
+
+5.  [前端性能优化原理与实践](https://juejin.im/book/5b936540f265da0a9624b04b/section/5bb6218ee51d450e7762f873#heading-5)
+
+
+6. [基于 JavaScript 开发灵活的数据应用](https://juejin.im/book/5a93727bf265da4e8c452960)
 
 ## 2020.07
 	
@@ -38,7 +45,7 @@ mooc
 	performance-optimization2  2020年最新前端全面讲解性能优化实战教程
 	
 
-3. [Web 前端面试指南与高频考题解析](https://juejin.im/book/5a8f9ddcf265da4e9f6fb959)
+
 
 
 ## 2020.05月
