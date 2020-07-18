@@ -1,27 +1,4 @@
 
-### 6月计划
-	
-	18. Vue2.0开发企业级移动端音乐Web Appustbhuangyiustbhuangyi
-	16. Vue2.6+Node.js+MongoDB 全栈打造商城系统河畔一角河畔一角
-
-
-
-
-
-
-
-###5月计划：
-
-
-
-	6. Vue全家桶实战 从零独立开发企业级电商系统(免费升级Vue3.0)
-	7. Vue Element+Node.js开发企业通用管理后台系统
-	31. Vue全家桶+SSR+Koa2全栈开发美团网
-	39. Vue 实战商业级读书Web APP 全面提升技能
-	
-
-
-
 
 
 
@@ -35,6 +12,15 @@
 
 ## 第一页40个
 
+todo ( 4
+
+	6. Vue全家桶实战 从零独立开发企业级电商系统(免费升级Vue3.0)
+	7. Vue Element+Node.js开发企业通用管理后台系统
+	31. Vue全家桶+SSR+Koa2全栈开发美团网
+	39. Vue 实战商业级读书Web APP 全面提升技能
+
+
+
 done（9+
 
 	3. 前端框架及项目面试 聚焦Vue/React/Webpack双越双越
@@ -47,12 +33,6 @@ done（9+
 	37. 微信小程序入门与实战 常用组件API开发技巧项目实战
 	38. Vue.js2.5+cube-ui重构饿了么App（经典再升级
 
-todo ( 4
-
-	6. Vue全家桶实战 从零独立开发企业级电商系统(免费升级Vue3.0)
-	7. Vue Element+Node.js开发企业通用管理后台系统
-	31. Vue全家桶+SSR+Koa2全栈开发美团网
-	39. Vue 实战商业级读书Web APP 全面提升技能
 
 
 
@@ -94,6 +74,11 @@ not at all ( 11
 
 
 ##第二页20个
+
+todo( 2
+
+	18. Vue2.0开发企业级移动端音乐Web Appustbhuangyiustbhuangyi
+	
 	
 done（7+
 
@@ -105,20 +90,15 @@ done（7+
 	14. 让你页面速度飞起来 Web前端性能优化千迦千迦
 	19. 腾讯大牛亲授 Web前后端漏洞分析与防御技巧
 
-todo( 2
-
-	18. Vue2.0开发企业级移动端音乐Web Appustbhuangyiustbhuangyi
-	16. Vue2.6+Node.js+MongoDB 全栈打造商城系统河畔一角河畔一角
-
 wait(6
 
 	1. React服务器渲染原理解析与实践
 	3. Javascript设计模式系统讲解与应用
 	5. React开发简书项目 从零基础入门到实战
 	6. React全家桶+AntD共享单车后台管理系统开发
-	7. Vue.js源码全方位深入解析 （含Vue3.0源码分析）
 	12. React16+React-Router4 从零打造企业级电商后台管理系统RosenRosen
-
+	16. Vue2.6+Node.js+MongoDB 全栈打造商城系统河畔一角河畔一角
+	7. Vue.js源码全方位深入解析 （含Vue3.0源码分析）
 
 not at all  ( 5
 
