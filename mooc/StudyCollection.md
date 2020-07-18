@@ -1,11 +1,45 @@
 
 
+## 2020.07月
+
+其他
+
+	最新Javascript零基础视频教程
+	
+	
+思否
+	
+vue
+
+mooc
+	
+1. jd-native-app 混合开发入门 主流开发方案实战京东移动端APP
+	
+2. [Webpack 从零入门到工程化实战](https://www.imooc.com/read/29)
+
+极客时间
+
+	Vue开发实战
+	微信小程序全栈开发实战
+	玩转webpack
+	JavaScript核心原理解析
+
+掘金小册
+	
+1. [大厂 H5 开发实战手册](https://juejin.im/book/5a7bfe595188257a7349b52a)
+
+
+2. [使用 webpack 定制前端开发环境](https://juejin.im/book/5a6abad5518825733c144469)
+
 
 ## 2020.07
 	
 	jd-native-app 混合开发入门 主流开发方案实战京东移动端APP
 	performance-optimization2  2020年最新前端全面讲解性能优化实战教程
 	
+
+3. [Web 前端面试指南与高频考题解析](https://juejin.im/book/5a8f9ddcf265da4e9f6fb959)
+
 
 ## 2020.05月
 
