@@ -13,9 +13,9 @@ vue
 
 mooc
 	
-1. jd-native-app 混合开发入门 主流开发方案实战京东移动端APP
-	
-2. [Webpack 从零入门到工程化实战](https://www.imooc.com/read/29)
+1. [混合开发入门 Vue结合Android/iOS
+开发仿京东项目App](https://coding.imooc.com/class/377.html)	
+2. [Webpack 从零入门到工程化实战——专栏](https://www.imooc.com/read/29)
 
 极客时间
 
@@ -27,6 +27,8 @@ mooc
 [玩转webpack](https://time.geekbang.org/course/intro/100028901?utm_source=time_web&utm_medium=menu&utm_term=timewebmenu)
 
 [前端全链路性能优化实战](https://time.geekbang.org/course/intro/257)
+
+
 
 掘金小册
 	
