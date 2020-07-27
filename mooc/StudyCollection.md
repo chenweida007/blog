@@ -21,8 +21,12 @@ mooc
 
 	Vue开发实战
 	微信小程序全栈开发实战
-	玩转webpack
+	
 	JavaScript核心原理解析
+	
+[玩转webpack](https://time.geekbang.org/course/intro/100028901?utm_source=time_web&utm_medium=menu&utm_term=timewebmenu)
+
+[前端全链路性能优化实战](https://time.geekbang.org/course/intro/257)
 
 掘金小册
 	
