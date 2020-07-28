@@ -2,15 +2,13 @@
 
 1. 如何用dom获取一个元素
 
-		document.getElementById
-		document. getElementsByClassName
-		document.getElementsByTagName
-		
-		
+		​	document.getElementById
+	​	document. getElementsByClassName
+	​	document.getElementsByTagName
+	
 		document.querySelector("#demo");  //单个元素
 		document.querySelectorAll(".example");
-		
-		
+	
 		querySelectorAll 返回的是一个 Static Node List，而 getElementsBy 系列的返回的是一个 Live Node List。
 
 
@@ -18,10 +16,8 @@
 
 	[这一次，彻底弄懂 JavaScript 执行机制](https://juejin.im/post/59e85eebf265da430d571f89)
 	
-	哪些同步，哪些异步方法
+	哪些同步，哪些异步方法	
 	
-	
-		
 		process.nextTick(() => {
 		  console.log('nextTick')
 		})
@@ -33,7 +29,7 @@
 		  console.log('setImmediate')
 		})
 		console.log('end') 
-	   
+	
 	运行结果
 	
 		end
@@ -45,7 +41,7 @@
 	process.nextTick 和 promise.then 都属于 microtask，而 setImmediate 属于 macrotask，在事件循环的 check 阶段执行。事件循环的每个阶段（macrotask）之间都会执行 microtask，事件循环的开始会先执行一次 microtask。   
 	
 	
-	主线程执行栈空，去 异步队列 看。
+	主线程执行栈空，去异步队列 看。
 	
 		promise 是同步任务, 立即执行  
 		then 是异步执行的
@@ -54,8 +50,6 @@
 		macro-task(宏任务)：包括整体代码script，setTimeout，setInterval
 		micro-task(微任务)：Promise.then，process.nextTick	
 	判断结果	
-		
-		
 		setTimeout(function() {
 		    console.log('setTimeout');
 		})
@@ -65,17 +59,17 @@
 		}).then(function() {
 		    console.log('then');
 		})
-
-		console.log('console');
 		
+		console.log('console');
+	
 	这段代码作为宏任务，进入主线程。	
-	先遇到setTimeout，那么将其回调函数注册后分发到宏任务Event Queue。(注册过程与上同，下文不再描述)		
+先遇到setTimeout，那么将其回调函数注册后分发到宏任务Event Queue。(注册过程与上同，下文不再描述)		
 	接下来遇到了Promise，new Promise立即执行，then函数分发到微任务Event Queue。		
 	遇到console.log()，立即执行。好啦，整体代码script作为第一个宏任务执行结束，看看有哪些微任务？我们发现了then在微任务Event Queue里面，执行。	
 	ok，第一轮事件循环结束了，我们开始第二轮循环，当然要从宏任务Event Queue开始。我们发现了宏任务Event Queue中setTimeout对应的回调函数，立即执行。
 	结束。		
 		
-
+	
 3. AST
 4. http、https 有什么区别？
 
@@ -84,7 +78,7 @@
 	http 的缺点：
 
 		明文传输，不够安全，相当于在网络上裸奔
-	
+		
 		传输信息可能会中间人，拦截，或者篡改，中间人攻击
 	
 	
@@ -109,17 +103,17 @@
 		公钥和个人信息用一个Hash算法生成一个消息摘要， 这个Hash算法有个极好的特性，只要输入数据有一点点变化，那生成的消息摘要就会有巨变，这样就可以防止别人修改原始内容。
 		
 		数字证书 = 公钥+个人信息  + CA加密摘要生成的  数字签名
-		
+	
 	如何验证是否被改
 		
 		当Bill把他的证书发给我的时候， 我就用同样的Hash 算法， 再次生成消息摘要，然后用CA的公钥对数字签名解密， 得到CA创建的消息摘要， 两者一比，就知道有没有人篡改了！
-			
-		
-		
-		
+	
+	
+	​	
+	​	
+	
 5. Vue 组件间通信方式
 	
-		
 6. 预加载是什么时候到什么时候？
 7. proxy解决什么
 8. 小程序 h5区别
@@ -134,15 +128,10 @@
 	[并发](https://segmentfault.com/a/1190000016848192#item-8)
 	
 		题目的意思是需要我们这么做，先并发请求 3 张图片，当一张图片加载完成后，又会继续发起一张图片的请求，让并发数保持在 3 个，直到需要加载的图片都全部发起请求。
-	
+		
 		用 Promise 来实现就是，先并发请求3个图片资源，这样可以得到 3 个 Promise，组成一个数组，就叫promises 吧
 		然后不断的调用 Promise.race 来返回最快改变状态的 Promise，然后从数组（promises ）中删掉这个 Promise 对象，再加入一个新的 Promise，直到全部的 url 被取完，最后再使用 Promise.all 来处理一遍数组（promises ）中没有改变状态的 Promise。
 
-
-	
-	
-	
-	
 11. 全局对象
 
 		浏览器里面 window 就是 global 
@@ -156,10 +145,8 @@
 
 14.  promise 值穿透问题  
 
-	
-
 	```
-	Promise.resolve(1)
+Promise.resolve(1)
 	  .then(2)
 	  .then(Promise.resolve(3))
 	  .then(console.log)
@@ -170,16 +157,10 @@
 	
 	then 方法接受的参数是函数，而如果传递的并非是一个函数，它实际上会将其解释为 then(null)，这就会导致前一个 Promise 的结果会穿透下面。  
 	
-
-		.then 或者 .catch 的参数期望是函数，传入非函数则会发生值穿透。
 	
+		.then 或者 .catch 的参数期望是函数，传入非函数则会发生值穿透。
+
 	解析参考：[深入 Promise(一)——Promise 实现详解](http://blog.51cto.com/12405360/1897688)
-
-
-
-
-
-
 
 15. sleep 函数
 	
@@ -195,8 +176,7 @@
 17. 给一个dom添加class， jquery怎么添加的，classList 怎么做的，addClass
 
 		$("p:first").addClass("intro");
-		
-		
+	
 		let div = document.querySelector('div');
 		div.classList.add("newClass");
 		div.classList.remove("newClass");
@@ -206,7 +186,6 @@
 20. 第一个div 元素
 	
 	:nth-of-type(n) 选择器匹配属于父元素的特定类型的第 N 个子元素的每个元素.
-		
 		div:nth-of-type(1)
 		{
 		background:#ff0000;
