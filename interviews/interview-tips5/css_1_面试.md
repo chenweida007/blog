@@ -1,6 +1,6 @@
 ## css 部分
 
-1. 选择器 + > ~ ? 后代
+1. 选择器 + > ~     + 相邻选择器， > 后代选择器，~ 兄弟选择器
 
 2. less 比 css 好在哪里
 	
@@ -38,8 +38,7 @@
 			
 			@var: 50vh/2;
 			width: calc(50% + (@var - 20px));  // 结果是 calc(50% + (25vh - 20px))
-		
-
+	
 3. position
 	
 		relative、static、absolute、fixed、inherit
@@ -49,11 +48,11 @@
 5. relative 和 position 区别
 	
 		相对于自身，并不脱离文档流，不管你怎么移动，它原有的位置还是会留着。
-		相对于父元素不是static， 并且脱离文档流
+	相对于父元素不是static， 并且脱离文档流
 6. flex 和 grid 区别	
 	
 		flex是一维布局 ，grid是二维布局也就是说grid布局可以更好的操作行和列。
-		flex布局和grid布局是现在的主流的两种布局方式。
+	flex布局和grid布局是现在的主流的两种布局方式。
 7. 介绍一下flex
 	
 		display
