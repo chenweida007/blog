@@ -21,9 +21,9 @@
 	es, import  from, export default  
 
 7，const 和 let 声明变量不在Window上
-	
+
 	通过{} 生成块级作用域， 在方法的[[Scopes]] 属性中，看到变量a
-	
+
 8， 函数表达式不能 变量提升，函数声明可以
 9，匿名函数的执行是具有全局性的，那怎么具有的全局性呢？
 this的指向在函数定义的时候是确定不了的，只有函数执行的时候才能确定this到底指向谁，实际上this的最终指向的是那个调用它的对象
@@ -33,7 +33,6 @@ var b = 10;
 (function b(){
     b = 20;
     console.log(this.b);
-
 })();
 ```
 
@@ -67,14 +66,30 @@ console.log(obj)
 }
 ```
 
+ **什么是类数组ArrayLike**
+
+- 拥有length属性，其它属性（索引）为非负整数(对象中的索引会被当做字符串来处理，这里你可以当做是个非负整数串来理解)
+- 不具有数组所具有的方法
+
+```
+//类数组示例
+var a = {'1':'gg','2':'love','4':'meimei',length:5};
+Array.prototype.join.call(a,'+');//'+gg+love++meimei'
+
+//非类数组示例
+var c = {'1':2};   //没有length属性就不是类数组
+```
+
 15，箭头函数
 
 函数体内的this是定义时所在的对象，不是使用时的对象    
 不能使用arguments对象    
-不能使用yield明星，不能作为 generator 函数    
-不可以使用new  
+不能使用yield，不能作为 generator 函数    
+不能作为构造函数，不可以使用new  
 没有自己的this, 不能使用 call\apply  
 没有prototype属性
+
+
 
 
 16, a.b.c.d 比 a[b][c][d]效率高  
@@ -100,8 +115,6 @@ console.log(obj)
 a = {}, c = 123, a[c] = 'c' 
 
 a['123'] = 'c'
-
-
 ```
 
 21， input 搜索防抖，处理中文输入
