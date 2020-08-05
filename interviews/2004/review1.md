@@ -73,3 +73,25 @@ div:nth-of-type(1)
 
 disabled 和  readonly 有什么区别
 
+```html
+<html>
+<div class="row" id="product-plan">
+    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+        <ul  onclick="getclick(event)" id="0">
+            <li id="1">版式文件产品</li>
+            <li id="2">基于位置服务</li>
+            <li id="3">司法信息化解决方案</li>
+            <li id="4">版式应用解决方</li>
+
+        </ul>
+    </div>
+</div>
+<script>
+function getclick(e) {
+    console.log(e.currentTarget.id)
+    console.log(e.target.id)
+}
+
+</script>
+</html>
+```
