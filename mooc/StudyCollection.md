@@ -1,19 +1,21 @@
 
 
-##2020.08月
+### 2020.08月
+
+[开课吧前端高级工程师](https://www.kaikeba.com/land/subject?type=2&tagid=4)
 
 [开课吧web全栈工程师](https://www.kaikeba.com/land/subject?type=2&tagid=4)
 
-
-## 2020.07月
+### 2020.07月
 
 其他
 
 	最新Javascript零基础视频教程
-	
-	
+
+
+​	
 思否
-	
+​	
 vue
 
 mooc
@@ -28,7 +30,7 @@ mooc
 	微信小程序全栈开发实战
 	
 	JavaScript核心原理解析
-	
+
 [玩转webpack](https://time.geekbang.org/course/intro/100028901?utm_source=time_web&utm_medium=menu&utm_term=timewebmenu)
 
 [前端全链路性能优化实战](https://time.geekbang.org/course/intro/257)
@@ -50,16 +52,12 @@ mooc
 
 6. [基于 JavaScript 开发灵活的数据应用](https://juejin.im/book/5a93727bf265da4e8c452960)
 
-## 2020.07
-	
+
+
 	jd-native-app 混合开发入门 主流开发方案实战京东移动端APP
 	performance-optimization2  2020年最新前端全面讲解性能优化实战教程
-	
 
-
-
-
-## 2020.05月
+### 2020.05月
 
 新增：
 
@@ -75,7 +73,7 @@ mooc
 
 
 
-## 2020.04
+### 2020.04
 
 共：16个。
 
@@ -118,8 +116,9 @@ mooc
 	 album 小程序相册
 	 knowledge 知识到家
 	 video-swiper  轮播视频项目
-	
-	 
 
-	
+
+​	 
+
+​	
 
